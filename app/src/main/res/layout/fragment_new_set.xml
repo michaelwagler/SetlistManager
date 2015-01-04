@@ -1,0 +1,171 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="michaelwagler.setlistmanager.NewSetFragment">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/datePicker"
+        android:layout_alignEnd="@+id/datePicker" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/setNameEditText"
+        android:textSize="20dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignRight="@+id/datePicker"
+        android:layout_alignEnd="@+id/datePicker">
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/setNameEditText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Time"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/currentTime"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/openTimePickerButton"
+        android:text="change time"
+        android:layout_alignTop="@+id/currentTime"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:id="@+id/textView3"
+        android:layout_above="@+id/datePicker"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:id="@+id/datePicker"
+        android:datePickerMode="spinner"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></DatePicker>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_alignParentBottom="true"
+       android:layout_height="wrap_content"
+       android:id="@+id/linearLayout">
+
+       <Button
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_gravity="left|bottom"
+        android:id="@+id/cancelButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="wrap_content"
+        android:text="Create"
+        android:layout_gravity="right|bottom"
+        android:id="@+id/doneButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true" />
+
+   </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Band"
+        android:id="@+id/currentBandLabel"
+        android:layout_below="@+id/datePicker"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="current band"
+        android:id="@+id/currentBand"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/currentBandLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="change band"
+        android:id="@+id/changeBandButton"
+        android:layout_below="@+id/currentBand"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Venue"
+        android:id="@+id/currentVenueLabel"
+        android:layout_above="@+id/currentVenue"
+        android:layout_alignLeft="@+id/currentVenue"
+        android:layout_alignStart="@+id/currentVenue" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="current venue"
+        android:textColor="#FFFFFF"
+        android:id="@+id/currentVenue"
+        android:layout_above="@+id/changeVenueButton"
+        android:layout_alignLeft="@+id/changeVenueButton"
+        android:layout_alignStart="@+id/changeVenueButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="change venue"
+        android:id="@+id/changeVenueButton"
+        android:layout_alignTop="@+id/changeBandButton"
+        android:layout_alignLeft="@+id/openTimePickerButton"
+        android:layout_alignStart="@+id/openTimePickerButton"
+        android:layout_marginLeft="53dp"
+        android:layout_marginStart="53dp" />
+
+
+</RelativeLayout>

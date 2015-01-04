@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Setlist Manager</string>
+
+    <string name="delete_text">Delete</string>
+    <string name="remove_text">remove</string>
+    <string name="song_label">View Song</string>
+    <string name="set_label">View Set</string>
+    <string name="add_set">New Setlist</string>
+    <string name="add_song">Add Song</string>
+    <string name="action_settings">Settings</string>
+    <string name="associate_band">Associate with band</string>
+    <string name="home_view_sets_button_text">Sets</string>
+    <string name="home_view_bands_button_text">Bands</string>
+    <string name="home_view_songs_button_text">Songs</string>
+    <string name="new_song">New Song</string>
+
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
+
+    <string name="title_activity_home">Home</string>
+    <string name="sets_activity_label">Set Lists</string>
+    <string name="title_activity_bands">Bands</string>
+
+    <string name="set_info">Info</string>
+    <string name="duplicate_set">Duplicate</string>
+    <string name="export_set">Share</string>
+    <string name="chooser_title">Share setlist with:</string>
+    <string name="edit_set">Edit</string>
+
+
+</resources>

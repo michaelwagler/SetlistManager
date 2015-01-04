@@ -1,0 +1,23 @@
+-make id's and text names dynamic
+-restructure database: need songs, setlists, bands, venues, gigs
+
+-make git repo
+
+**make it so name's of songs/sets are unique!
+**make text stuff dynamic!
+**clean up code, remove comments
+
+
+eventually:
+-figure out about supporting older versions of android
+-be able to re-order tunes
+-how often a song is played
+-song lengths
+-song transitions
+-generate random set list
+-backup to google drive
+-export set list, sync with some kind of account
+-web app?
+
+
+
