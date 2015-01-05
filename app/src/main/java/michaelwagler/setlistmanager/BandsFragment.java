@@ -35,7 +35,7 @@ public class BandsFragment extends ListFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         updateUI();
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.activity_bands, container, false);
+        return inflater.inflate(R.layout.fragment_bands, container, false);
     }
 
     @Override
