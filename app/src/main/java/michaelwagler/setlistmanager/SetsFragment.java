@@ -61,7 +61,7 @@ public class SetsFragment extends ListFragment {
         }
         updateUI();
 
-        return inflater.inflate(R.layout.activity_sets, container, false);
+        return inflater.inflate(R.layout.fragment_sets, container, false);
 
     }
 

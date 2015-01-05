@@ -40,7 +40,7 @@ public class SongsFragment extends ListFragment{
         super.onCreateView(inflater, container, savedInstanceState);
         updateUI();
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.activity_songs, container, false);
+        return inflater.inflate(R.layout.fragment_songs, container, false);
     }
 
     @Override

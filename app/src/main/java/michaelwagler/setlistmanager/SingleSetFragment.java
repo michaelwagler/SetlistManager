@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -61,7 +60,7 @@ public class SingleSetFragment extends ListFragment{
             }
         }
 
-        View v = inflater.inflate(R.layout.activity_single_set, container, false);
+        View v = inflater.inflate(R.layout.fragment_single_set, container, false);
         return v;
     }
 
