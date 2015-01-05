@@ -72,6 +72,7 @@ public class MainActivity extends Activity {
             }
 
             /** Called when a drawer has settled in a completely open state. */
+
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 ActionBar aB = getActionBar();
@@ -93,12 +94,6 @@ public class MainActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         //aB.setHomeButtonEnabled(true);
 
-        if (savedInstanceState == null) {
-            selectItem(0);
-
-        }
-
-        openDrawer();
 
     }
 
@@ -107,6 +102,13 @@ public class MainActivity extends Activity {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
         drawerToggle.syncState();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        openDrawer();
     }
 
     @Override
