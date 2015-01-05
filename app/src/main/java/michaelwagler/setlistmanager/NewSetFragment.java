@@ -163,17 +163,26 @@ public class NewSetFragment extends Fragment implements View.OnClickListener{
                 otherBuilder.setTitle("Associate with band");
 
                 final List<Band> bands = helper.getAllBands();
-                String[] bandsArray = new String[bands.size()];
-                for (int k = 0; k < bands.size(); k++) {
-                    bandsArray[k] = bands.get(k).toString();
+                // offset the array by one, so that the first entry can be 'none'
+                int size = bands.size() + 1;
+                String[] bandsArray = new String[size];
+                bandsArray[0] = "(none)";
+                for (int k = 1; k < size; k++) {
+                    bandsArray[k] = bands.get(k -1).toString();
                 }
 
                 otherBuilder.setItems(bandsArray, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Band b = bands.get(which);
-                        currentBand.setText(b.getName());
-                        bandId = b.getId();
+                        if (which == 0) {
+                            bandId = -1;
+                            currentBand.setText("none");
+                        }
+                        else {
+                            Band b = bands.get(which - 1);
+                            currentBand.setText(b.getName());
+                            bandId = b.getId();
+                        }
                     }
                 });
                 otherBuilder.create().show();
@@ -186,17 +195,28 @@ public class NewSetFragment extends Fragment implements View.OnClickListener{
                 venueBuilder.setTitle("Associate with venue");
 
                 final List<Venue> venues = helper.getAllVenues();
-                String[] venuesArray = new String[venues.size()];
-                for (int k = 0; k < venues.size(); k++) {
-                    venuesArray[k] = venues.get(k).toString();
+
+                // offset the array by one, so that the first entry can be 'none'
+                int arraySize = venues.size() + 1;
+                String[] venuesArray = new String[arraySize];
+                venuesArray[0] = "(none)";
+                for (int k = 1; k < arraySize; k++) {
+                    venuesArray[k] = venues.get(k - 1).toString();
                 }
 
                 venueBuilder.setItems(venuesArray, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Venue v = venues.get(which);
-                        currentVenue.setText(v.getName());
-                        venueId = v.getId();
+                        if (which == 0) {
+                            // they selected none, set venue to null;
+                            venueId = -1;
+                            currentVenue.setText("none");
+                        }
+                        else {
+                            Venue v = venues.get(which - 1);
+                            currentVenue.setText(v.getName());
+                            venueId = v.getId();
+                        }
                     }
                 });
 

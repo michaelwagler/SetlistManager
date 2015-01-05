@@ -321,6 +321,24 @@ public class SingleSetFragment extends ListFragment{
                 else {
                     Log.e(LOG, "resolve activity did not work!");
                 }
+                return true;
+
+            case R.id.action_delete_set:
+                AlertDialog.Builder builder = new AlertDialog.Builder(
+                        SingleSetFragment.super.getActivity());
+                builder.setTitle("Delete Set");
+                builder.setMessage("Are you sure you want to delete this set?");
+                builder.setNegativeButton("Cancel", null);
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        helper.deleteSet(set.getName());
+                        getFragmentManager().popBackStack();
+                    }
+                });
+
+                builder.create().show();
+                return true;
 
             default:
                 return false;

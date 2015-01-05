@@ -109,8 +109,19 @@ public class VenuesFragment extends ListFragment {
 
                             case 2:
                                 // Delete Venue
-                                helper.deleteVenue(venueName);
-                                updateUI();
+                                AlertDialog.Builder builder = new AlertDialog.Builder(
+                                        VenuesFragment.super.getActivity());
+                                builder.setTitle("Delete Venue");
+                                builder.setMessage("Are you sure you want to delete this venue?");
+                                builder.setNegativeButton("Cancel", null);
+                                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        helper.deleteVenue(venueName);
+                                        updateUI();
+                                    }
+                                });
+                                builder.create().show();
                                 break;
 
                             default:

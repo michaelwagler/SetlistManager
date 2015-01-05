@@ -110,8 +110,19 @@ public class BandsFragment extends ListFragment {
 
                             case 2:
                                 // Delete Band
-                                helper.deleteBand(bandName);
-                                updateUI();
+                                AlertDialog.Builder builder = new AlertDialog.Builder(
+                                        BandsFragment.super.getActivity());
+                                builder.setTitle("Delete Band");
+                                builder.setMessage("Are you sure you want to delete this band?");
+                                builder.setNegativeButton("Cancel", null);
+                                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        helper.deleteBand(bandName);
+                                        updateUI();
+                                    }
+                                });
+                                builder.create().show();
                                 break;
 
                             default:
