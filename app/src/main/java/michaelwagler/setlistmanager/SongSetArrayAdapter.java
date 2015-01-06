@@ -49,7 +49,7 @@ public class SongSetArrayAdapter extends ArrayAdapter {
                 switch (v.getId()) {
                     case R.id.setSongDeleteButton:
                         TextView tv = (TextView) ((View) v.getParent()).findViewById(R.id.setSongTextView);
-                        DBHelper helper = new DBHelper(context);
+                        DBHelper helper = DBHelper.getInstance(context);
                         Song song = helper.getSongByName(tv.getText().toString());
                         helper.deleteSongSet(song.getId(), set.getId());
                         values.remove(positionInner);

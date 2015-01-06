@@ -82,7 +82,7 @@ public class NewSetFragment extends Fragment implements View.OnClickListener{
         currentBand.setText("none");
         currentVenue.setText("none");
 
-        helper = new DBHelper(NewSetFragment.super.getActivity());
+        helper = DBHelper.getInstance(NewSetFragment.super.getActivity());
 
 
         Bundle bundle = this.getArguments();

@@ -148,7 +148,7 @@ public class SongsFragment extends ListFragment{
 
         // populate the ListView with all sets
 
-        helper = new DBHelper(SongsFragment.super.getActivity());
+        helper = DBHelper.getInstance(SongsFragment.super.getActivity());
         SQLiteDatabase sqlDB = helper.getReadableDatabase();
 
         Cursor cursor = sqlDB.query(DBContract.SongTable.TABLE,
@@ -194,7 +194,7 @@ public class SongsFragment extends ListFragment{
                         //Log.d("DeleteActivity", inputField.getText().toString());
                         String name = nameField.getText().toString();
                         Song song = new Song(name);
-                        DBHelper db = new DBHelper(SongsFragment.super.getActivity());
+                        DBHelper db = DBHelper.getInstance(SongsFragment.super.getActivity());
 
                         db.createSong(song);
                         updateUI();

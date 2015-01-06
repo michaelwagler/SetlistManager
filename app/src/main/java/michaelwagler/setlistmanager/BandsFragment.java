@@ -143,7 +143,7 @@ public class BandsFragment extends ListFragment {
         main.getActionBar().setTitle(title);
 
 
-        helper = new DBHelper(BandsFragment.super.getActivity());
+        helper = DBHelper.getInstance(BandsFragment.super.getActivity());
         SQLiteDatabase sqlDB = helper.getReadableDatabase();
 
         Cursor cursor = sqlDB.query(DBContract.BandTable.TABLE,
@@ -189,7 +189,7 @@ public class BandsFragment extends ListFragment {
 
                         Band band = new Band(name);
 
-                        DBHelper db = new DBHelper(BandsFragment.super.getActivity());
+                        DBHelper db = DBHelper.getInstance(BandsFragment.super.getActivity());
 
                         db.createBand(band);
                         updateUI();

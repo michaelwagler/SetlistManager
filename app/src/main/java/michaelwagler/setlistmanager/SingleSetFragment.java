@@ -49,7 +49,7 @@ public class SingleSetFragment extends ListFragment{
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
-        helper = new DBHelper(SingleSetFragment.super.getActivity());
+        helper = DBHelper.getInstance(SingleSetFragment.super.getActivity());
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -79,7 +79,7 @@ public class SingleSetFragment extends ListFragment{
         // populate the ListView with the appropriate songs
         updateTitle(SingleSetFragment.super.getActivity());
 
-        helper = new DBHelper(SingleSetFragment.super.getActivity());
+        helper = DBHelper.getInstance(SingleSetFragment.super.getActivity());
         List<Song> songs = helper.getAllSongsBySet(set.getName());
 
         ListAdapter listadapter = new SongSetArrayAdapter(
@@ -88,24 +88,25 @@ public class SingleSetFragment extends ListFragment{
         this.setListAdapter(listadapter);
 
 
-
         final DragSortListView DSLV = (DragSortListView) getListView();
         DSLV.setDropListener(new DragSortListView.DropListener() {
             @Override
             public void drop(int from, int to) {
+                ListView lv = getListView();
+
                 if (from == to) {
                     return;
                 }
-                ListView lv = getListView();
                 if (from > to) {
-                    for (int i = from; i >= to; --i) {
+                    for (int i = from; i >= to; i--) {
                         Song s = helper.getSongByName(lv.getItemAtPosition(i).toString());
                         helper.updateSongSet(s.getId(), set.getId(), i + 1);
                     }
                 }
                 else {
-                    for (int i = from; i <= to; ++i) {
+                    for (int i = from; i <= to; i++) {
                         Song s = helper.getSongByName(lv.getItemAtPosition(i).toString());
+
                         helper.updateSongSet(s.getId(), set.getId(), i - 1);
 
                     }
@@ -163,12 +164,12 @@ public class SingleSetFragment extends ListFragment{
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String name = inputField.getText().toString();
                         Song song = new Song(name);
-                        DBHelper helper = new DBHelper(
+                        DBHelper helper = DBHelper.getInstance(
                                 SingleSetFragment.super.getActivity());
 
                         long song_id = helper.returnSongOrCreate(song);
 
-                        int pos = getListView().getCount() - 1;
+                        int pos = getListView().getCount();
 
                         // Show dialog if song is already in this set.
                         if (helper.setContainsSong(set.getId(), song_id)) {

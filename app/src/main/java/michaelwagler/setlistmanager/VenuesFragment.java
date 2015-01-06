@@ -141,7 +141,7 @@ public class VenuesFragment extends ListFragment {
         main.setTitle(title);
         main.getActionBar().setTitle(title);
 
-        helper = new DBHelper(VenuesFragment.super.getActivity());
+        helper = DBHelper.getInstance(VenuesFragment.super.getActivity());
         SQLiteDatabase sqlDB = helper.getReadableDatabase();
 
         Cursor cursor = sqlDB.query(DBContract.VenueTable.TABLE,
@@ -187,7 +187,7 @@ public class VenuesFragment extends ListFragment {
 
                         Venue venue = new Venue(name);
 
-                        DBHelper db = new DBHelper(VenuesFragment.super.getActivity());
+                        DBHelper db = DBHelper.getInstance(VenuesFragment.super.getActivity());
 
                         db.createVenue(venue);
                         updateUI();

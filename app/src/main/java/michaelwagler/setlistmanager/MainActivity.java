@@ -208,12 +208,14 @@ public class MainActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         // FOR DEBUGGING
-        //int id = item.getItemId();
         /*
+        int id = item.getItemId();
+
         if (id == R.id.populate_db) {
             populateDB();
         }
         */
+
 
         return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 
@@ -223,7 +225,7 @@ public class MainActivity extends Activity {
         String deleteSQL = "DELETE FROM song; DELETE FROM setlist; " +
                 "DELETE FROM venue; DELETE FROM band; DELETE FROM songs_sets;";
 
-        DBHelper helper = new DBHelper(MainActivity.this);
+        DBHelper helper = DBHelper.getInstance(MainActivity.this);
         SQLiteDatabase sqlDB = helper.getWritableDatabase();
         sqlDB.execSQL(deleteSQL);
         sqlDB.close();

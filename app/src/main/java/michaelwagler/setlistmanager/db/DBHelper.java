@@ -35,9 +35,19 @@ public class DBHelper extends SQLiteOpenHelper {
     private String LOG = "DBHelper";
     private DatabaseUtils dbutils;
 
+    private static DBHelper sInstance;
+
 
     public DBHelper(Context context) {
         super(context, DBContract.DB_NAME, null, DBContract.DB_VERSION);
+    }
+
+    public static DBHelper getInstance(Context context) {
+        if (sInstance == null) {
+            sInstance = new DBHelper(context);
+            return sInstance;
+        }
+        return sInstance;
     }
 
 
@@ -359,6 +369,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // Creating song_set
 
     public long createSongSet(long song_id, long set_id, int pos) {
+        Log.d(LOG, "createSongSet: song_id:" + song_id + "set_id: " + set_id + "pos: " + pos);
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -403,14 +414,15 @@ public class DBHelper extends SQLiteOpenHelper {
   //Updating a song set
 
     public void updateSongSet(long id, long set_id, int position) {
+        //Log.d(LOG, "updateSongSet, song id to be " + id + "set_id to be " + set_id + "position to be" + position);
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String updateSQL = "UPDATE " + SongSetTable.TABLE + " SET " +
-                SongSetTable.SET_ID + " = " + set_id +
-                ", " + SongSetTable.POSITION + " = " + position +
-                " WHERE " + SongSetTable.SONG_ID
-                + " = " + id;
-        db.execSQL(updateSQL);
+        ContentValues values = new ContentValues();
+        values.put(SongSetTable.POSITION, position);
+
+        int res = db.update(SongSetTable.TABLE, values, SongSetTable.SONG_ID + "= ? AND " + SongSetTable.SET_ID + " = ?",
+                new String[]{String.valueOf(id), String.valueOf(set_id)});
+
     }
 
 

@@ -46,7 +46,7 @@ public class SetsFragment extends ListFragment {
 
         setHasOptionsMenu(true);
 
-        helper = new DBHelper(super.getActivity());
+        helper = DBHelper.getInstance(super.getActivity());
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
