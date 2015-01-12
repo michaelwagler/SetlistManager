@@ -34,12 +34,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private String LOG = "DBHelper";
     private DatabaseUtils dbutils;
-
+    private final String DB_FILEPATH;
     private static DBHelper sInstance;
 
 
     public DBHelper(Context context) {
         super(context, DBContract.DB_NAME, null, DBContract.DB_VERSION);
+        final String packageName = context.getPackageName();
+        DB_FILEPATH = "/data/data" + packageName + "/databases/" + DBContract.DB_NAME;
     }
 
     public static DBHelper getInstance(Context context) {

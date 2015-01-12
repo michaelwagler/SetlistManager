@@ -293,8 +293,16 @@ public class SetsFragment extends ListFragment {
                 //View child = view.findViewById(R.id.setTextView);
 
                 //String setlist = ((TextView) child).getText().toString();
+                Bundle bundle = new Bundle();
+                if (band != null) {
+                    bundle.putString("band_id", String.valueOf(band.getId()));
+                }
+                if (venue != null) {
+                    bundle.putString("venue_id", String.valueOf(venue.getId()));
+                }
 
                 Fragment fragment = new NewSetFragment();
+                fragment.setArguments(bundle);
                 FragmentManager fragmentManager = getFragmentManager();
 
                 fragmentManager.beginTransaction()

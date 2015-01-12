@@ -122,11 +122,11 @@ public class SingleSetFragment extends ListFragment{
     private void updateTitle(Activity activity) {
         ActionBar aB = activity.getActionBar();
         aB.setTitle(set.getName());
+        activity.setTitle(set.getName());
         aB.setSubtitle(null);
 
         Band band = helper.getBandById( set.getBandId() );
         if (band != null) {
-            aB.setTitle(set.getName());
             aB.setSubtitle(band.getName());
         }
     }

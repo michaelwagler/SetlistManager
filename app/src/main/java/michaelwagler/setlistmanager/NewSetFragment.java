@@ -87,10 +87,13 @@ public class NewSetFragment extends Fragment implements View.OnClickListener{
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            String id_str = bundle.getString("set_id");
-            if (id_str != null) {
+            String set_id = bundle.getString("set_id");
+            String band_id = bundle.getString("band_id");
+            String venue_id = bundle.getString("venue_id");
+
+            if (set_id != null) {
                 // This means we are editing an existing set.
-                int setId = Integer.parseInt(id_str);
+                int setId = Integer.parseInt(set_id);
                 done.setText("Update");
                 set = helper.getSetById(setId);
                 editName.setText(set.getName());
@@ -109,16 +112,26 @@ public class NewSetFragment extends Fragment implements View.OnClickListener{
                     currentVenue.setText(venue.getName());
                     venueId = venue.getId();
                 }
+            } else if (band_id != null) {
+                Log.d(LOG, "band_id: " + band_id);
+                // this means we are adding a new setlist for a particular band
+                Band theBand = helper.getBandById(Integer.parseInt(band_id));
+                currentBand.setText(theBand.getName());
+                bandId = theBand.getId();
+            } else if (venue_id != null) {
+                Log.d(LOG, "venue_id: " + venue_id);
+                // this means we are adding a new setlist for a particular venue
+                Venue theVenue = helper.getVenueById(Integer.parseInt(venue_id));
+                currentVenue.setText(theVenue.getName());
+                venueId = theVenue.getId();
+            }
+
+
+            if (set == null) {
+                ActionBar aB = NewSetFragment.super.getActivity().getActionBar();
+                aB.setTitle("New Set");
             }
         }
-
-
-        if (set == null) {
-            ActionBar aB = NewSetFragment.super.getActivity().getActionBar();
-            aB.setTitle("New Set");
-        }
-
-
         return v;
     }
 

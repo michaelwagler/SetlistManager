@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -95,6 +96,7 @@ public class MainActivity extends Activity {
         //aB.setHomeButtonEnabled(true);
 
 
+        openDrawer();
     }
 
     @Override
@@ -108,8 +110,13 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        openDrawer();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -219,6 +226,12 @@ public class MainActivity extends Activity {
 
         return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 
+    }
+
+    // taken from http://stackoverflow.com/questions/13693880/hide-android-virtual-keyboard
+    public void hideSoftKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager)  getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
     public void populateDB() {

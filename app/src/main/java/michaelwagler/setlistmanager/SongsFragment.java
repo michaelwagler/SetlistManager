@@ -153,7 +153,7 @@ public class SongsFragment extends ListFragment{
 
         Cursor cursor = sqlDB.query(DBContract.SongTable.TABLE,
                 new String[]{DBContract._ID, DBContract.SongTable.COLUMN_NAME},
-                null, null, null, null, DBContract.SongTable.COLUMN_NAME);
+                null, null, null, null, "LOWER(" + DBContract.SongTable.COLUMN_NAME + ")");
 
 
         // display the songs in the cursor by rendering each in a song_view resource inside
