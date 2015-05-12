@@ -60,8 +60,7 @@ public class SingleSetFragment extends ListFragment{
             }
         }
 
-        View v = inflater.inflate(R.layout.fragment_single_set, container, false);
-        return v;
+        return inflater.inflate(R.layout.fragment_single_set, container, false);
     }
 
     @Override
@@ -77,18 +76,35 @@ public class SingleSetFragment extends ListFragment{
 
     private void updateUI() {
         // populate the ListView with the appropriate songs
+        Log.d(LOG, "updateUI");
         updateTitle(SingleSetFragment.super.getActivity());
 
         helper = DBHelper.getInstance(SingleSetFragment.super.getActivity());
-        List<Song> songs = helper.getAllSongsBySet(set.getName());
+        List<Song> songs = helper.getAllSongsBySetId(set.getId());
+        for (Song song: songs) {
+            Log.d(LOG, "song in songs:" + song.getName());
+        }
+        Log.d(LOG, "songs.size: " + songs.size());
 
-        ListAdapter listadapter = new SongSetArrayAdapter(
-                SingleSetFragment.super.getActivity(), R.layout.set_song_view,
-                R.id.setSongTextView, songs, set);
-        this.setListAdapter(listadapter);
+        // if this is first time, create a listAdapter
+        if (this.getListAdapter() == null) {
+
+            ListAdapter listadapter = new SongSetArrayAdapter(
+                    SingleSetFragment.super.getActivity(), R.layout.set_song_view,
+                    R.id.setSongTextView, songs, set);
+            this.setListAdapter(listadapter);
+        }
+
+        // otherwise, update the existing one
+        else {
+            ((SongSetArrayAdapter) this.getListAdapter()).refill(songs);
+        }
+
+
 
 
         final DragSortListView DSLV = (DragSortListView) getListView();
+
         DSLV.setDropListener(new DragSortListView.DropListener() {
             @Override
             public void drop(int from, int to) {
@@ -116,6 +132,7 @@ public class SingleSetFragment extends ListFragment{
                 updateUI();
             }
         });
+
     }
 
     // pass in the parent activity to make sure that it exists when this is called
@@ -231,6 +248,7 @@ public class SingleSetFragment extends ListFragment{
                 builder1.create().show();
                 return true;
 
+
             case R.id.action_duplicate:
                 // create a duplicate of this set
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(
@@ -255,6 +273,9 @@ public class SingleSetFragment extends ListFragment{
                         long duplicate_id = helper.createSet(duplicate);
                         List<Song> songs = helper.getAllSongsBySet(set.getName());
                         for (int i = 0; i < songs.size(); i++) {
+                            Log.d(LOG, "song being duplicated: " + songs.get(i) + ", song pos: " + i);
+                            Log.d(LOG, "song attributes: name: " + songs.get(i).getName() + ", pos: " + i + ", id: " + songs.get(i).getId());
+
                             helper.createSongSet(songs.get(i).getId(), duplicate_id, i);
                         }
 
@@ -282,6 +303,7 @@ public class SingleSetFragment extends ListFragment{
 
 
                 return true;
+
 
             case R.id.action_export:
                 String body = "";

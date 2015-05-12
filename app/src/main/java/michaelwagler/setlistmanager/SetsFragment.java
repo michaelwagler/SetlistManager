@@ -1,5 +1,8 @@
 package michaelwagler.setlistmanager;
 
+/*
+    Fragment that displays all sets, possibly just for one band or one venue.
+ */
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;

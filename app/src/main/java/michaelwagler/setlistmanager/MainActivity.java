@@ -196,9 +196,7 @@ public class MainActivity extends Activity {
 
     public String getSubtitle() {
         return fragmentSubtitle;
-
     }
-
 
 
     @Override
@@ -215,17 +213,15 @@ public class MainActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
 
         // FOR DEBUGGING
-        /*
-        int id = item.getItemId();
+
+        /* int id = item.getItemId();
 
         if (id == R.id.populate_db) {
             populateDB();
-        }
-        */
+        } */
 
 
         return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
-
     }
 
     // taken from http://stackoverflow.com/questions/13693880/hide-android-virtual-keyboard
@@ -234,6 +230,7 @@ public class MainActivity extends Activity {
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
+    // For testing
     public void populateDB() {
         String deleteSQL = "DELETE FROM song; DELETE FROM setlist; " +
                 "DELETE FROM venue; DELETE FROM band; DELETE FROM songs_sets;";

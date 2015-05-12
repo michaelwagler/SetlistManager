@@ -21,10 +21,8 @@ public class Song {
     }
 
     public Song() {
-
     }
 
-    // methods
 
     // setters
     public void setName(String name) {

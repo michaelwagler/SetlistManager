@@ -181,17 +181,47 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public List<Song> getAllSongsBySet(String set_name) {
+        Log.d(LOG, "getAllSOngsBySet(" + set_name + ")");
         List<Song> songs = new ArrayList<Song>();
 
-        String selectQuery = "SELECT s.name as song_name, s._id, s.length, st.*, ss.* FROM " + SongTable.TABLE + " s, "
+        String selectQuery = "SELECT s.name as song_name, s._id as song_id, s.length, st.*, ss.* FROM " + SongTable.TABLE + " s, "
                 + SetTable.TABLE + " st, " + SongSetTable.TABLE + " ss WHERE st."
                 + SetTable.COLUMN_NAME + " =? "+ " AND st." + DBContract._ID
                 + " = " + "ss." + SongSetTable.SET_ID + " AND s." + DBContract._ID + " = "
                 + "ss." + SongSetTable.SONG_ID + " ORDER BY " + SongSetTable.POSITION;
+        Log.d(LOG, "selectQuery: " + selectQuery);
 
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, new String[] {set_name});
+
+        if (c.moveToFirst()) {
+            do {
+                Song song = new Song();
+                song.setId(c.getInt(c.getColumnIndex("song_id")));
+                song.setName(c.getString(c.getColumnIndex("song_name")));
+                song.setLength(c.getInt(c.getColumnIndex(SongTable.COLUMN_LENGTH)));
+                songs.add(song);
+            } while (c.moveToNext());
+        }
+        return songs;
+
+    }
+
+    public List<Song> getAllSongsBySetId(int set_id) {
+        Log.d(LOG, "getAllSOngsBySet(" + set_id + ")");
+        List<Song> songs = new ArrayList<Song>();
+
+        String selectQuery = "SELECT s.name as song_name, s._id, s.length, st.*, ss.* FROM " + SongTable.TABLE + " s, "
+                + SetTable.TABLE + " st, " + SongSetTable.TABLE + " ss WHERE st."
+                + DBContract._ID + " = " + set_id + " AND st." + DBContract._ID
+                + " = " + "ss." + SongSetTable.SET_ID + " AND s." + DBContract._ID + " = "
+                + "ss." + SongSetTable.SONG_ID + " ORDER BY " + SongSetTable.POSITION;
+        Log.d(LOG, "selectQuery: " + selectQuery);
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
 
         if (c.moveToFirst()) {
             do {

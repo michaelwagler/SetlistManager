@@ -71,6 +71,7 @@ public class SongsFragment extends ListFragment{
 
                         switch (which) {
                             case 0:
+                                // add song to setlist
 
                                 AlertDialog.Builder innerBuilder = new AlertDialog.Builder(SongsFragment.super.getActivity());
 
@@ -86,12 +87,25 @@ public class SongsFragment extends ListFragment{
                                 innerBuilder.setItems(setsArray, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-
                                         Set s = sets.get(which);
                                         Song song = helper.getSongByName(songName);
-                                        int pos = helper.getAllSongsBySet(s.getName()).size();
-                                        helper.createSongSet(song.getId(), s.getId(), pos);
 
+                                        // Show dialog if song is already in this set.
+                                        if (helper.setContainsSong(s.getId(), song.getId())) {
+                                            AlertDialog.Builder warning = new AlertDialog.Builder(
+                                                    SongsFragment.super.getActivity());
+                                            warning.setMessage("This song is already in the selected set.");
+                                            warning.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                }
+                                            });
+                                            warning.create().show();
+                                        }
+                                        else {
+                                            int pos = helper.getAllSongsBySet(s.getName()).size();
+                                            helper.createSongSet(song.getId(), s.getId(), pos);
+                                        }
                                     }
                                 });
 

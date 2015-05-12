@@ -12,9 +12,12 @@
         android:showAsAction="always"
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/add_song" />
+
     <item android:id="@+id/action_duplicate"
         app:showAsAction="never"
         android:title="@string/duplicate_set" />
+
+
     <item android:id="@+id/action_export"
         app:showAsAction="never"
         android:title="@string/export_set" />

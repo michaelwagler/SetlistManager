@@ -1,5 +1,7 @@
 package michaelwagler.setlistmanager;
-
+/*
+ArrayAdapter used to attach event handler to individual songs in a setlist
+ */
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +23,7 @@ import michaelwagler.setlistmanager.model.Song;
 public class SongSetArrayAdapter extends ArrayAdapter {
     private String LOG = "SongSetArrayAdapter";
     private final Context context;
-    private final List<Song> values;
+    private List<Song> values;
     private final Set set;
 
 
@@ -30,6 +32,12 @@ public class SongSetArrayAdapter extends ArrayAdapter {
         this.context = context;
         this.values = values;
         this.set = set;
+    }
+
+    public void refill(List<Song> songs) {
+        this.values.clear();
+        this.values.addAll(songs);
+        notifyDataSetChanged();
     }
 
 
