@@ -212,7 +212,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d(LOG, "getAllSOngsBySet(" + set_id + ")");
         List<Song> songs = new ArrayList<Song>();
 
-        String selectQuery = "SELECT s.name as song_name, s._id, s.length, st.*, ss.* FROM " + SongTable.TABLE + " s, "
+        String selectQuery = "SELECT s.name as song_name, s._id as song_id, s.length, st.*, ss.* FROM " + SongTable.TABLE + " s, "
                 + SetTable.TABLE + " st, " + SongSetTable.TABLE + " ss WHERE st."
                 + DBContract._ID + " = " + set_id + " AND st." + DBContract._ID
                 + " = " + "ss." + SongSetTable.SET_ID + " AND s." + DBContract._ID + " = "
@@ -226,7 +226,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             do {
                 Song song = new Song();
-                song.setId(c.getInt(c.getColumnIndex(DBContract._ID)));
+                song.setId(c.getInt(c.getColumnIndex("song_id")));
                 song.setName(c.getString(c.getColumnIndex("song_name")));
                 song.setLength(c.getInt(c.getColumnIndex(SongTable.COLUMN_LENGTH)));
                 songs.add(song);
@@ -446,7 +446,7 @@ public class DBHelper extends SQLiteOpenHelper {
   //Updating a song set
 
     public void updateSongSet(long id, long set_id, int position) {
-        //Log.d(LOG, "updateSongSet, song id to be " + id + "set_id to be " + set_id + "position to be" + position);
+        Log.d(LOG, "updateSongSet, song id to be " + id + "set_id to be " + set_id + "position to be" + position);
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

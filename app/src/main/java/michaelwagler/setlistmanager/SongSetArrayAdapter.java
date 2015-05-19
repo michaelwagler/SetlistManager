@@ -61,6 +61,14 @@ public class SongSetArrayAdapter extends ArrayAdapter {
                         Song song = helper.getSongByName(tv.getText().toString());
                         helper.deleteSongSet(song.getId(), set.getId());
                         values.remove(positionInner);
+                        Log.d(LOG, "updating position of songs in set after song delete");
+                        for (int i = positionInner; i < values.size(); i ++) {
+                            //Log.d(LOG, "updating song with name: " + values.get(i).getName());
+                            helper.updateSongSet(values.get(i).getId(), set.getId(), i);
+                            //Log.d(LOG, "updating songs starting at positionInner: " + positionInner);
+                            //Log.d(LOG, "song: " + values.get(i).getName() + " in list at position:" + i);
+                        }
+                        // need to update the position of all the songs after this one
                         notifyDataSetChanged();
                         break;
                     default:

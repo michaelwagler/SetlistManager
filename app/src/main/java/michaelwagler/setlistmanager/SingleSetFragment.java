@@ -81,10 +81,6 @@ public class SingleSetFragment extends ListFragment{
 
         helper = DBHelper.getInstance(SingleSetFragment.super.getActivity());
         List<Song> songs = helper.getAllSongsBySetId(set.getId());
-        for (Song song: songs) {
-            Log.d(LOG, "song in songs:" + song.getName());
-        }
-        Log.d(LOG, "songs.size: " + songs.size());
 
         // if this is first time, create a listAdapter
         if (this.getListAdapter() == null) {
